@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Create or Edit Award{% endblock %}
+
+{% block content %}
+<h1>{% if form.price.data %}Edit Award{% else %}Create Award{% endif %}</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.price.label(class="form-control-label") }}
+        {{ form.price(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.terms.label(class="form-control-label") }}
+        {{ form.terms(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

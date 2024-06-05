@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Tender List{% endblock %}
+
+{% block content %}
+<h1>Tender List</h1>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.tender_create') }}" class="btn btn-primary mb-3">Create New Tender</a>
+{% endif %}
+<ul class="list-group">
+    {% for tender in tenders %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.tender_detail', id=tender.id) }}">{{ tender.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

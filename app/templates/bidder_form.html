@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Create or Edit Bidder{% endblock %}
+
+{% block content %}
+<h1>{% if form.name.data %}Edit Bidder{% else %}Create Bidder{% endif %}</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label(class="form-control-label") }}
+        {{ form.name(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.contact_info.label(class="form-control-label") }}
+        {{ form.contact_info(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

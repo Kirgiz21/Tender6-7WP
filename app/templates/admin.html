@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}All Users{% endblock title %}
+{% block content %}
+    <h1 class="display-2">All Users</h1>
+    {% if users %}
+        {% for user in users %}
+            <div class="alert alert-dark">
+                <h1><strong>Username: </strong>{{ user.username }}</h1>
+                <p><strong>Role: </strong>{{ user.role.name }}</p>
+                <p><strong>Create on: </strong>{{ user.created_on }}</p>
+                <p><strong>Update on: </strong>{{ user.update_on }}</p>
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-primary mx-3" href="{{ url_for('main.user_update', id=user.id) }}">Update user</a>
+                    <a class="btn btn-sm btn-outline-danger mx-3" href="{{ url_for('main.user_delete', id=user.id) }}">Delete user</a>
+                </div>
+            </div>
+            <br>
+      {% endfor %}
+    {% else %}
+      <p>Nothing (((</p>
+    {% endif %}
+{% endblock %}

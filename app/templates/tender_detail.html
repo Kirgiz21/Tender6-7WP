@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Tender Detail{% endblock %}
+
+{% block content %}
+<h1>{{ tender.title }}</h1>
+<p>{{ tender.description }}</p>
+<p>Start Date: {{ tender.start_date }}</p>
+<p>End Date: {{ tender.end_date }}</p>
+
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.tender_update', id=tender.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="{{ url_for('main.tender_delete', id=tender.id) }}" class="btn btn-danger">Delete</a>
+{% endif %}
+
+<a href="{{ url_for('main.tenderitem_list', tender_id=tender.id) }}"><h2>Tender Items</h2></a>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.tenderitem_create', tender_id=tender.id) }}" class="btn btn-primary mb-3">Add Item</a>
+{% endif %}
+<ul class="list-group">
+    {% for item in tender.items %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.tenderitem_detail', tender_id=tender.id, id=item.id) }}">{{ item.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.bid_list', tender_id=tender.id) }}"><h2>Bids</h2></a>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.bid_create', tender_id=tender.id) }}" class="btn btn-primary mb-3">Add Bid</a>
+{% endif %}
+<ul class="list-group">
+    {% for bid in tender.bids %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.bid_detail', tender_id=tender.id, id=bid.id) }}">Bid by {{ bid.bidder.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.award_list', tender_id=tender.id) }}"><h2>Awards</h2></a>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.award_create', tender_id=tender.id) }}" class="btn btn-primary mb-3">Add Award</a>
+{% endif %}
+<ul class="list-group">
+    {% for award in tender.awards %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.award_detail', tender_id=tender.id, id=award.id) }}">Award to {{ award.bidder.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

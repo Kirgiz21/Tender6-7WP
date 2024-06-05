@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Tender{% endblock %}
+
+{% block content %}
+<h1>Are you sure you want to delete "{{ tender.title }}"?</h1>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{{ url_for('main.tender_detail', id=tender.id) }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

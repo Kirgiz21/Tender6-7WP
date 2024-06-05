@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Bidder Detail{% endblock %}
+
+{% block content %}
+<h1>{{ bidder.name }}</h1>
+<p>Contact Info: {{ bidder.contact_info }}</p>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.bidder_update', id=bidder.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="{{ url_for('main.bidder_delete', id=bidder.id) }}" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endblock %}

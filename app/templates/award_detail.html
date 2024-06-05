@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Award Detail{% endblock %}
+
+{% block content %}
+<h1>Award to {{ award.bidder.name }}</h1>
+<p>Price: {{ award.price }}</p>
+<p>Terms: {{ award.terms }}</p>
+
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.award_update', tender_id=award.tender_id, id=award.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="{{ url_for('main.award_delete', tender_id=award.tender_id, id=award.id) }}" class="btn btn-danger">Delete</a>
+{% endif %}
+<a href="{{ url_for('main.tender_detail', id=award.tender.id) }}" class="btn btn-primary">Back to tender</a>
+{% endblock %}

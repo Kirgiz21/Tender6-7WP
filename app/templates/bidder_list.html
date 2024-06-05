@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Bidder List{% endblock %}
+
+{% block content %}
+<h1>Bidder List</h1>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.bidder_create') }}" class="btn btn-primary mb-3">Create New Bidder</a>
+{% endif %}
+<ul class="list-group">
+    {% for bidder in bidders %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.bidder_detail', id=bidder.id) }}">{{ bidder.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

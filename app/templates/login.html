@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+    <h1>Login</h1>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.username.label(class="form-control-label") }}
+            {{ form.username(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.password.label(class="form-control-label") }}
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.remember.label(class="form-control-label") }}
+            {{ form.remember() }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Award List{% endblock %}
+
+{% block content %}
+<h1>Awards for "{{ tender.title }}"</h1>
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.award_create', tender_id=tender.id) }}" class="btn btn-primary mb-3">Add New Award</a>
+{% endif %}
+<a href="{{ url_for('main.tender_detail', id=tender.id) }}" class="btn btn-primary mb-3">Back to tender</a>
+<ul class="list-group">
+    {% for award in awards %}
+    <li class="list-group-item">
+        <a href="{{ url_for('main.award_detail', tender_id=tender.id, id=award.id) }}">Award to {{ award.bidder.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

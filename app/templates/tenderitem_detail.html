@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Tender Item Detail{% endblock %}
+
+{% block content %}
+<h1>{{ item.name }}</h1>
+<p>{{ item.description }}</p>
+<p>Quantity: {{ item.quantity }} {{ item.unit }}</p>
+
+{% if current_user.is_authenticated and current_user.role.name == 'Адміністратор' %}
+    <a href="{{ url_for('main.tenderitem_update', tender_id=item.tender_id, id=item.id) }}" class="btn btn-secondary">Edit</a>
+    <a href="{{ url_for('main.tenderitem_delete', tender_id=item.tender_id, id=item.id) }}" class="btn btn-danger">Delete</a>
+{% endif %}
+<a href="{{ url_for('main.tender_detail', id=item.tender.id) }}" class="btn btn-primary">Back to tender</a>
+{% endblock %}
